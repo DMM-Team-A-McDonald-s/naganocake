@@ -1,0 +1,35 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+  
+<div class="mb-5 text-center">
+  <h1>商品詳細ページ</h1>
+</div>
+
+<table class='table'>
+  <tr><%= image_tag @item.image, alt: "商品画像", size:'100x100' %></tr>
+  <tr>
+	  <th>商品名</th>
+	  <th><%= item.name %></th>
+  </tr>
+  <tr>
+	  <th>商品説明</th>
+	  <th><%= item.introduction %></th>
+  </tr>
+  <tr>
+    <th>ジャンル</th>
+    <th><%= item.genre.name %></th>
+  </tr>
+  <tr>
+    <th>税込価格(税抜価格)</th>
+    <th><%= @item.tax_included_price %>円 (<%= @item.price %>円</th>
+  </tr>
+
+  </tr>
+  <tr>
+    <th>販売ステータス</th>
+    <th><%= @item.status_label %></th>
+  </tr>
+</table>
+
+編集する
