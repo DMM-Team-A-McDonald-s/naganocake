@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
+  has_one_attached :image
+
   TAX_RATE = 0.1
-  
     def tax_included_price
     (price * (1 + TAX_RATE)).round
     end
