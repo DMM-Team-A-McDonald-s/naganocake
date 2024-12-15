@@ -7,9 +7,11 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  root to: "homes#top"
-  get "home/about"=>"homes#about"
+ 
+  
   scope module: :public do
+    root to: "homes#top"
+    get "home/about"=>"homes#about"
     resources :items, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update]
     get "customers/unsubscribe"=>"customers#unsubscribe"
