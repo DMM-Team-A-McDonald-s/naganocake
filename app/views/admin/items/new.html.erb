@@ -3,9 +3,9 @@
 </div>
 
 <div class="flex flex-wrap justify-center">
-<%= form_with model: Item.new do |f| %>
+<%= form_with model: @item, url:admin_items_path, method: :post, local:true do |f| %>
   <h4>商品画像</h4>
-  <%= f.file_field :image %>
+  <%= f.file_field :image, accept: "image/*" %>
 
   <h4>商品名</h4>
   <%= f.text_field :name %>
@@ -14,11 +14,24 @@
   <%= f.text_area :introduction %>
 
   <h4>ジャンル</h4>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, {}, {class: 'form-control'} %>
 
   <h4>税抜き価格</h4>
-  <%= f.number_field :price %>
+  <%= f.number_field :price %>円
 
   <h4>販売ステータス</h4>
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    販売中
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+  販売停止中
+  </label>
+</div>
   
 
   <%= f.submit '新規登録' ,class:"btn btn-success" %>
