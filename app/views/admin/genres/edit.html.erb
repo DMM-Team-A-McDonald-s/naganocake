@@ -1,0 +1,13 @@
+<div class="mb-5 text-center">
+  <h1>ジャンル編集</h1>
+</div>
+
+<%= form_with model: @genre, url: admin_genres_path, method: :post, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "ジャンル名" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="text-center">
+    <%= f.submit '変更を保存' ,class:"btn btn-success" %>
+  </div>
+<% end %>
