@@ -11,19 +11,20 @@
     </div>
     <div class="d-flex flex-wrap">
 
-<%#    <h2>新着商品</h2>
-<%#        <% @items.each do |item| %> 
-<%#          <%= link_to item_path(item.id), class: "text-decoration-none w-25" do %>
-<%#            <div class="card m-2 p-1 card-hover">
-<%#              <%= image_tag item.get_item_image(100,100), class: "card-img-top rounded shadow-sm" %>
-<%#              <div class="card-body text-body">
-<%#                <h5 class="card-title text-primary"><%= item.name %></h5>
-<%#                <p class="card-text text-primary">\<%= item.price %></p>
-<%#              </div>
-<%#            </div>
-<%#          <% end %>
-<%#        <% end %>
-<%#      <%= link_to "全ての商品を見る ＞", items_path, style: "float: right;" %>
+    <h2>新着商品</h2>
+    <div class="d-flex flex-wrap">
+        <% @items.each do |item| %> 
+          <%= link_to item_path(item.id), class: "text-decoration-none w-25" do %>
+            <div class="card m-2 p-1 card-hover" style="width: 12rem;">
+              <%= image_tag item.image.variant(resize_to_fill: [50, 50]), class: "card-img-top rounded shadow-sm" if item.image.attached? %>
+            <div class="card-body text-body">
+              <h5 class="card-title text-primary"><%= item.name %></h5>
+              <p class="card-text text-primary">￥<%= item.price %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <%= link_to "全ての商品を見る ＞", items_path, style: "float: right;" %>
      </div>
   </div>
 </div>
