@@ -2,7 +2,7 @@
   <h1>ジャンル編集</h1>
 </div>
 
-<%= form_with model: @genre, url: admin_genres_path, method: :post, local: true do |f| %>
+<%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch, local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, "ジャンル名" %>
     <%= f.text_field :name %>
