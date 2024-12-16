@@ -1,2 +1,29 @@
-<h1>商品一覧ページ</h1>
+<div class="mb-5 text-center">
+  <h1>商品一覧</h1>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">商品ID</th>
+      <th scope="col">商品名</th>
+      <th scope="col">税抜価格</th>
+      <th scope="col">ジャンル</th>
+      <th scope="col">ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+    <tr>
+      <th><%= item.id %></th>
+      <td><%= link_to item.name, admin_item_path(item) %></td>
+      <td><%= item.price %></td>
+<%#   <td><%= item.genre.name %></td> %>
+      <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @items %>
 

@@ -1,7 +1,7 @@
 class Admin::ItemsController < ApplicationController
   
   def index
-    @items = Item.all
+    @items = Item.page(params[:page]).per(10)
   end
 
   def new
@@ -28,7 +28,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update
-      redirect_to items_path
+      redirect_to admin_item_path(@item)
     else
       render:edit
     end

@@ -1,11 +1,12 @@
 class Item < ApplicationRecord
-  
-  validates :name, presence: true
-  validates :introduction, presence: true
-  validates :price, presence: true
-  validates :is_active, presence: true
-  validates :image, presence: true
-
   has_one_attached :image
-  
-end
+
+  TAX_RATE = 0.1
+    def tax_included_price
+    (price * (1 + TAX_RATE)).round
+    end
+
+    def status_label
+      is_active ? "販売中" : "販売停止中"
+    end
+  end
