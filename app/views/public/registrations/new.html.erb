@@ -40,15 +40,15 @@
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    (<%= @minimum_password_length %>文字以上)
     <% end %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "パスワード(確認用)" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
@@ -58,4 +58,4 @@
 <% end %>
 
 <h4>既に登録済みの方</h4>
-<%= link_to "こちら", new_session_path(resource_name) %>からログインしてください
+<%= render "public/shared/links" %>からログインしてください
