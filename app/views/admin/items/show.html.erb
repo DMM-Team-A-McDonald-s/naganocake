@@ -2,34 +2,43 @@
   <%= flash[:notice] %>
 </div>
   
-<div class="mb-5 text-center">
-  <h1>商品詳細ページ</h1>
+<div class="mt-3 mb-5 ml-3 text-left">
+  <h2>商品詳細</h2>
 </div>
 
-<table class='table'>
-  <tr><%= image_tag @item.image, alt: "商品画像", size:'100x100' %></tr>
-  <tr>
-	  <th>商品名</th>
-	  <td><%= @item.name %></td>
-  </tr>
-  <tr>
-	  <th>商品説明</th>
-	  <td><%= @item.introduction %></td>
-  </tr>
-  <tr>
-    <th>ジャンル</th>
-    <td><%= @item.genre.name %></td>
-  </tr>
-  <tr>
-    <th>税込価格(税抜価格)</th>
-    <td><%= @item.tax_included_price %>円 (<%= @item.price %>円)</td>
-  </tr>
-  <tr>
-    <th>販売ステータス</th>
-    <td><%= @item.status_label %></td>
-  </tr>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag @item.image, alt: "商品画像", size:'200x200' %>
+    </div>
 
-<div class="text-center">
+    <div class="col-8">
+      <table class="table no-border">
+	    <tr>
+        <th>商品名</th>
+	      <td><%= @item.name %></td>
+      </tr>
+      <tr>
+	      <th>商品説明</th>
+	      <td><%= @item.introduction %></td>
+      </tr>
+      <tr>
+        <th>ジャンル</th>
+        <td><%= @item.genre.name %></td>
+      </tr>
+      <tr>
+        <th>税込価格(税抜価格)</th>
+        <td><%= number_with_delimiter(@item.tax_included_price) %>円 (<%= number_with_delimiter(@item.price) %>円)</td>
+      </tr>
+      <tr>
+        <th>販売ステータス</th>
+        <td><%= @item.status_label %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="text-center mt-3">
   <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
 </div>
