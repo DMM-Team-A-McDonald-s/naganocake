@@ -1,0 +1,66 @@
+<h5 class="col-2 offset-1 bg-light">注文情報入力</h5>
+
+<table class="payment_method offset-1">
+  <tr>
+    <th>支払い方法</th>
+  </tr>
+  <%= form_with model: @order, method: :post, local: true do |f| %>
+  <tr>
+    <td>
+      &emsp;<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+      <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &emsp;<%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+      <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+    </td>
+  </tr>
+  </table>
+  <table class="offset-1">
+  <tr>
+    <th>お届け先</th>
+  </tr>
+  <tr>
+    <td>
+      &emsp;<%= f.radio_button :address, "address" %>
+      <%= f.label :address, "ご自身の住所" %>
+    </td>
+  </tr>
+  <tr>
+    <td>&emsp;〒@order.address</td>
+  </tr>
+  <tr>
+    <td>
+      &emsp;<%= f.radio_button :address, "address" %>
+      <%= f.label :address, "登録済みの住所から選択" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &emsp;&emsp;<%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &emsp;<%= f.radio_button :address, "address" %> <%= f.label :address, "新しいお届け先" %>
+    </td>
+  </tr>
+  <tr>
+    <td style="font-size : 12px;">&emsp;&emsp;&emsp;&emsp;郵便番号(ハイフンなし)</td>
+    <td><%= f.text_field :postal_code, size: 30 , maxlength: 7, class: "", placeholder: "0000000" %></td>
+  </tr>
+  <tr>
+    <td style="font-size : 12px;">&emsp;&emsp;&emsp;&emsp;住所</td>
+    <td><%= f.text_field :address, size: 60, class: "", placeholder: "東京都渋谷区代々木神園町0-0" %></td>
+  </tr>
+  <tr>
+    <td style="font-size : 12px;">&emsp;&emsp;&emsp;&emsp;宛名</td>
+    <td><%= f.text_field :name, size: 30, class: "", placeholder: "令和道子" %></td>
+  </tr>
+</table>
+  <div class="text-center">
+    <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-3" %>
+  </div>
+  <% end %>
