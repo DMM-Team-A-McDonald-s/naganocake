@@ -1,0 +1,79 @@
+orders/show
+<h1>Header</h1>
+<div class="col-2 offset-2 ">
+  <h5 class="offset-2 bg-light">注文履歴詳細</h5>
+</div>
+<div class="offset-1">
+<div class="customer_info offset-1">
+  <dl class="row">
+    <dt class="col-2">購入者</dt>
+    <dd class="col-10">@order.customer.last_name @order.customer</dd>
+    <dt class="col-2">注文日</dt>
+    <dd class="col-10">@order.created_at</dd>
+    <dt class="col-2">配送先</dt>
+    <dd class="col-10">〒@order.postal_code @order.address @order.address.name</dd>
+    <dt class="col-2">支払い方法</dt>
+    <dd class="col-10">@order.payment_method</dd>
+    <dt class="col-2">注文ステータス</dt>
+    <dd class="col-2">
+      <select>
+        <option value="">入金待ち</option>
+        <option value="">製作中</option>
+        <option value="">発送済み</option>
+      </select>
+    </dd>
+    <button type="button" class="btn btn-success">更新</button>
+  </dl>
+</div>
+<div class="container" style="margin: 0; padding: 0;">
+  <div class="d-flex flex-row">
+      <table class="table mx-auto col-9">
+        <thead>
+          <tr class="table-secondary">
+            <th>商品名</th>
+            <th scope="col">単価(税込)</th>
+            <th scope="col">数量</th>
+            <th class="text-break">小計</th>
+            <th scope="col" class="text-nowrap">制作ステータス</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%# コントローラーで注文のorder_detailsをまとめた@order_detailsを作成 %>
+          <%# <% @order_details.item.each do |order|%> 
+          <tr>
+            <td class="text-break">order.items.name</td>
+            <td class="text-break">order.items.price*1.1</td>
+            <td class="text-break">order.order_details.amount</td>
+            <td class="text-break">order.items.price*1.1*order.order_details.amount</td>
+            <td>
+              <select>
+                <option value="">着手不可</option>
+                <option value="">製作中</option>
+                <option value="">制作完了</option>
+              </select>
+            </td>
+            <td><button type="button" class="btn btn-success text-nowrap">更新</button></td>
+          </tr>
+          <%# <% item_price_box << order.items.price*1.1*order.order_details.amount %> 
+          <%# <% end %> 
+        </tbody>
+      </table>
+    <div class="right_box col-3 offset-1 d-flex align-items-end">
+        <dl class="row">
+          <dt class="col-6">商品合計</dt>
+          <%# <% product_total=0  %> 
+          <%# <% item_price_box.each do |order_amount| %> 
+            <%# <% product_total = product_total + order_amount %> 
+          <%# <% end %> 
+          <dd class="col-6">product_total</dd>
+          <dt class="col-6">送料</dt>
+          <dd class="col-6">@order.shipping_cost</dd>
+          <dt class="col-6">請求金額合計</dt>
+          <dd class="col-6">@order.total_payment</dd>
+        </dl>
+    </div>
+  </div>
+</div>
+</div>
+
