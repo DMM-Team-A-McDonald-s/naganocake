@@ -1,32 +1,38 @@
 class Public::AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    @address = Address.new
+    @addresses = current_customer.addresses
   end
   
   def edit
-    @addresse = Address.find(params[:id])
+    @address = Address.find(params[:id])
   end
   
   def create
-    @addresse = current_customer.addresses.new(address_params)
-    if @addresse.save
+    Rails.logger.debug "PARAMS: #{params.inspect}"
+    @address = current_customer.addresses.new(address_params)
+    if @address.save
       redirect_to addresses_path, notice: "配送先住所が追加されました。"
     else
+      @addresses = current_customer.addresses
       render :index
     end
   end
   
   def update
-    @addresse = Address.find(params[:id])
-    @addresse.update(address_params)
-      redirect_to addresses_path(customer_id)
+    @address = Address.find(params[:id])
+    if @address.update(address_params)
+      redirect_to addresses_path, notice: "配送先住所が追加されました。"
+    else
+      render :edit
+    end
   end
   
   def destroy
-    @addresse = Address.find(params[:id])
-    @addresse.destroy
-      redirect_to addresses_path(customer_id)
+    @address = Address.find(params[:id])
+    @address.destroy
+      redirect_to addresses_path, notice: "配送先住所が削除されました。"
   end
   
   private
@@ -34,6 +40,4 @@ class Public::AddressesController < ApplicationController
       params.require(:address).permit(:name, :postal_code, :address)
     end
   end
-  
 
-end
