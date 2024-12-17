@@ -1,26 +1,37 @@
-<div>
-  <%= image_tag @item.image, alt: "商品画像", size:'150x150' %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>ジャンル検索</h3>
+      <% Genre.all.each do |genre| %>
+        <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
+      <% end %>
+    </div>
+    
+<div class="col-md-3">
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, alt: "商品画像", size:'200x200' %>
+  <% else %>
+    <%= image_tag "no-image.png", size: '200x200' %>
+  <% end %>
 </div>
 
-<table class='table'>
-  <tr>
-	  <td><%= @item.name %></td>
-  </tr>
-  <tr>
-	  <td><%= @item.introduction %></td>
-  </tr>
-  <tr>
-    <td>￥<%= @item.tax_included_price %>(税込)</td>
-  </tr>
-</table>
-
+<div class="col-md-6">
+  <table class='table table-borderless'>
+    <tr>
+	    <td style="font-size: 1.5em; font-weight: bold;"><%= @item.name %></td>
+    </tr>
+    <tr>
+	    <td><%= @item.introduction %></td>
+    </tr>
+    <tr>
+      <td style="font-size: 1.3em; font-weight: bold;">￥<%= number_with_delimiter(@item.tax_included_price) %>(税込)</td>
+    </tr>
+  </table>
   <%= form_with model: @item, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :quantity, "個数" %>
-      <%= f.number_field :quantity, value: 1, min: 1, max: 100 %> <!-- 最小1、最大100個まで -->
-    </div>
-    <div class="form-group">
-      <%= f.submit "カートに入れる", class: "btn btn-success" %>
+    <div class="form-group d-flex align-items-center">
+      <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: "個数選択" }, class: "form-select", aria: { label: "個数選択" } %> 
+      <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
     </div>
   <% end %>
+</div>
   
