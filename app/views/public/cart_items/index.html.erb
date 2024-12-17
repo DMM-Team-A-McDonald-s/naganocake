@@ -1,5 +1,37 @@
-カートインデックス
-<% @cart_items.each do |cart_item| %>
-  <%= cart_item.item.name %>
-  <%= cart_item.amount %>
-<% end %>
+ショッピングカート
+
+<%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+
+<table class="table table-bordered">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">商品名</th>
+      <th scope="col">単価(税込)</th>
+      <th scope="col">数量</th>
+      <th scope="col">小計</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+    <tr>
+      <th scope="row"><%= cart_item.item.name %> </th>
+      <% require 'bigdecimal' %>
+      <td>
+        <%= cart_item.item.with_tax_price %>円 
+      </td>
+      <td><%= cart_item.amount %> </td>
+      <td>
+        <%= cart_item.subtotal %>円
+      </td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%# <% @cart_items.each do |cart_item| %>
+  <%# <%= cart_item.item.name %> 
+  <%# <%= cart_item.amount %> 
+<%# <% end %> 
