@@ -1,1 +1,51 @@
 @use '~bootstrap/scss/bootstrap';
+
+// ヘッダー用のスタイル
+.header {
+  background-color: #F1E9E7;
+  color: #424242;
+}
+
+.header .row {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+}
+
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list-item {
+  margin-right: 10px;
+}
+
+.btn-outline-dark {
+  font-weight: bold;
+}
+
+// フッター用のスタイル
+.footer {
+  background-color: #F1E9E7;
+  color: #424242;
+  padding:10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.float-left {
+  margin: 0;
+}
+
+.float-right {
+  margin: 0;
+  text-align: right;
+}
+
