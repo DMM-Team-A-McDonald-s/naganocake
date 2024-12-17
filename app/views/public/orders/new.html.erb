@@ -1,6 +1,6 @@
-<h1>注文情報入力</h1>
+<h5 class="col-2 offset-1 bg-light">注文情報入力</h5>
 
-<table>
+<table class="payment_method offset-1">
   <tr>
     <th>支払い方法</th>
   </tr>
@@ -13,6 +13,8 @@
     <td><%= f.radio_button :payment_method, Order.payment_methods.key(1) %></td>
     <td><%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%></td>
   </tr>
+  </table>
+  <table class="offset-1">
   <tr>
     <th>お届け先</th>
   </tr>
@@ -36,7 +38,7 @@
   </tr>
   <tr>
     <td>郵便番号(ハイフンなし)</td>
-    <td><%= f.text_field :postal_code, size: 20 , maxlength: 7, class: "", placeholder: "0000000" %></td>
+    <td><%= f.text_field :postal_code, size: 30 , maxlength: 7, class: "", placeholder: "0000000" %></td>
   </tr>
   <tr>
     <td>住所</td>
