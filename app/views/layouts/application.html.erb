@@ -12,6 +12,15 @@
   </head>
 
   <body>
+    <% if controller_path.start_with?("admin") %>
+      <%= render "layouts/header_admin" %>
+    <% else %>
+      <%= render "layouts/header_public" %>
+    <% end %>
+
+  
     <%= yield %>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>
