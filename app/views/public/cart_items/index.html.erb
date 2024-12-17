@@ -1,54 +1,67 @@
-<div class="d-flex justify-content-between">
-  ショッピングカート
-  <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <div class="d-flex justify-content-between" style="margin: 2% 0 2% 0;">
+        <h5 class="bg-light" style="padding: 0 8px 0 8px;">ショッピングカート</h5>
+        <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+      </div>
+
+      <table class="table table-bordered">
+        <thead class="table-secondary">
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価(税込)</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <th scope="row"><%= cart_item.item.name %> </th>
+            <td>
+              <%= cart_item.item.with_tax_price.to_s(:delimited) %>
+            </td>
+            <td>
+              <%= form_with model: cart_item, url:  cart_item_path(cart_item.id), method: :patch, local:true do |f| %>
+              <%# <%= cart_item.amount %>  
+              <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: "#{cart_item.amount}" }, class: "form-select" %> 
+              <%= f.submit "変更", class: "btn btn-success ml-5" %>
+              <% end %>
+            </td> 
+            <td>
+              <%= cart_item.subtotal.to_s(:delimited) %>
+            </td>
+            <td>
+              <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+          <% @main_total += cart_item.subtotal %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+          <div>
+            <%= link_to '買い物を続ける', root_path, class: "btn btn-primary" %>
+          </div>
+          <table class="table-bordered">
+            <tr>
+              <th class="table-secondary" style="padding: 20px 40px; ">
+                合計金額
+              </th>
+              <td style="padding: 20px 40px; " >
+                <%= @main_total.to_s(:delimited) %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center" style="margin-bottom: 10%;">
+        <%= link_to '情報入力に進む', root_path, class: "btn btn-success"  %>
+        <%# このボタンは仮です %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table class="table table-bordered">
-  <thead class="table-secondary">
-    <tr>
-      <th scope="col">商品名</th>
-      <th scope="col">単価(税込)</th>
-      <th scope="col">数量</th>
-      <th scope="col">小計</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
-    <tr>
-      <th scope="row"><%= cart_item.item.name %> </th>
-      <td>
-        <%= cart_item.item.with_tax_price.to_s(:delimited) %>
-      </td>
-      <td>
-        <%= form_with model: cart_item, url:  cart_item_path(cart_item.id), method: :patch, local:true do |f| %>
-        <%# <%= cart_item.amount %>  
-        <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: "#{cart_item.amount}" }, class: "form-select" %> 
-        <%= f.submit "変更", class: "btn btn-success ml-5" %>
-        <% end %>
-      </td> 
-      <td>
-        <%= cart_item.subtotal.to_s(:delimited) %>
-      </td>
-      <td>
-        <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
-      </td>
-    </tr>
-    <% @main_total += cart_item.subtotal %>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to '買い物を続ける', root_path, class: "btn btn-primary" %>
-<table>
-  <tr>
-    <th>
-      合計金額
-    </th>
-    <td>
-      <%= @main_total.to_s(:delimited) %>
-    </td>
-  </tr>
-</table>
-
-<%= link_to '情報入力に進む', root_path, class: "btn btn-success ml-5"  %>
-<%# このボタンは仮です %>
