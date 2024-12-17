@@ -1,6 +1,6 @@
-ショッピングカート
 
-<%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+  ショッピングカート
+  <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
 
 <table class="table table-bordered">
   <thead class="table-secondary">
@@ -16,22 +16,19 @@
     <% @cart_items.each do |cart_item| %>
     <tr>
       <th scope="row"><%= cart_item.item.name %> </th>
-      <% require 'bigdecimal' %>
       <td>
         <%= cart_item.item.with_tax_price %>円 
       </td>
-      <td><%= cart_item.amount %> </td>
+      <td>
+        <%= cart_item.amount %> 
+      </td> 
       <td>
         <%= cart_item.subtotal %>円
       </td>
-      <td></td>
+      <td>
+        <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-
-
-<%# <% @cart_items.each do |cart_item| %>
-  <%# <%= cart_item.item.name %> 
-  <%# <%= cart_item.amount %> 
-<%# <% end %> 
