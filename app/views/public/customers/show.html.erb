@@ -1,0 +1,5 @@
+<p>マイページ</p>
+
+<p>姓 <%= @customer.last_name %></p>
+
+<%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
