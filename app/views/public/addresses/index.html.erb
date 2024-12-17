@@ -6,26 +6,26 @@
   <div class="row">
     <div class="col-10">
     <%= form_with model: @address, url: addresses_path, local: true do |f| %>
-      <div class="field">
-        <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
-        <%= f.text_field :postal_code, placeholder: "0000000" %>
+      <div class="form-group">
+        <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "form-label" %>
+        <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control" %>
       </div>
-      <div class="field">
-        <%= f.label :address, "住所" %>
-        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+      <div class="form-group">
+        <%= f.label :address, "住所", class: "form-label" %>
+        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control" %>
       </div>
-      <div class="field">
-        <%= f.label :name, "宛名" %>
-        <%= f.text_field :name, placeholder: "令和道子" %>
+      <div class="form-group">
+        <%= f.label :name, "宛名", class: "form-label" %>
+        <%= f.text_field :name, placeholder: "令和道子", class: "form-control" %>
       </div>
-      <div class="actions">
+      <div class="form-group text-right">
         <%= f.submit "新規登録", class: "btn btn-success" %>
       </div>
     <% end %>
     
-  <table>
+  <table class="table table-bordered table-hover mt-4">
     <thead>
-      <tr>
+      <tr class="table-secondary">
         <th scope="col">郵便番号</th>
         <th scope="col">住所</th>
         <th scope="col">宛名</th>
@@ -39,7 +39,7 @@
           <td><%= address.address %></td>
           <td><%= address.name %></td>
           <td>
-            <%= link_to "編集する", edit_address_path(address), class:"btn btn-success" %>
+            <%= link_to "編集する", edit_address_path(address), class:"btn btn-success mr-3" %>
             <%= link_to "削除する", address_path(address), method: :delete, data: { confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
           </td>
         </tr>
