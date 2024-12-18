@@ -4,7 +4,7 @@
   <tr>
     <th>支払い方法</th>
   </tr>
-  <%= form_with model: @order, method: :post, local: true do |f| %>
+  <%= form_with model: @order, url: confirm_orders_path , method: :post, local: true do |f| %>
   <tr>
     <td>
       &emsp;<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
@@ -24,27 +24,27 @@
   </tr>
   <tr>
     <td>
-      &emsp;<%= f.radio_button :address, "address" %>
+      &emsp;<%= f.radio_button :address_option, "1" %>
       <%= f.label :address, "ご自身の住所" %>
     </td>
   </tr>
   <tr>
-    <td>&emsp;〒@order.address</td>
+    <td>&emsp;&emsp;<%= @customer_address %></td>
   </tr>
   <tr>
     <td>
-      &emsp;<%= f.radio_button :address, "address" %>
+      &emsp;<%= f.radio_button :address_option, "2" %>
       <%= f.label :address, "登録済みの住所から選択" %>
     </td>
   </tr>
   <tr>
     <td>
-      &emsp;&emsp;<%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+      &emsp;&emsp;<%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display) %>
     </td>
   </tr>
   <tr>
     <td>
-      &emsp;<%= f.radio_button :address, "address" %> <%= f.label :address, "新しいお届け先" %>
+      &emsp;<%= f.radio_button :address_option, "3" %> <%= f.label :address, "新しいお届け先" %>
     </td>
   </tr>
   <tr>

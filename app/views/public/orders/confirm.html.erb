@@ -1,0 +1,57 @@
+注文情報確認
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">商品名</th>
+      <th scope="col">単価(税込)</th>
+      <th scope="col">数量</th>
+      <th scope="col">小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+      <tr>
+        <th scope="row"><%= cart_item.item.name %></th>
+        <td><%= cart_item.item.price %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+      </tr>
+      <% @main_total += cart_item.subtotal %>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">送料</th>
+      <th scope="col">800</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">商品合計</th>
+      <td><%= @main_total.to_s(:delimited) %></td>
+    </tr>
+    <tr>
+      <th scope="row">請求金額</th>
+      <td><%= (@main_total + 800).to_s(:delimited)  %></td>
+    </tr>
+  </tbody>
+</table>
+
+支払い方法
+<%= I18n.t(@payment, scope: ["enums", "order", "payment_method"]) %>
+
+お届け先
+
+〒<%= @postal_code %><%= @address %><%= @address_name  %>
+
+<%= form_with model: @order, url: orders_path , method: :post, local: true do |f| %>
+
+  <%= f.hidden_field :payment_method, :value => @payment %>
+  <%= f.hidden_field :postal_code, :value => @postal_code %>
+  <%= f.hidden_field :address, :value => @address %>
+  <%= f.hidden_field :name, :value => @address_name %>
+  <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-3" %>
+<% end %>
