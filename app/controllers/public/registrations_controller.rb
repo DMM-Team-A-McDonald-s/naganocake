@@ -5,7 +5,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   
   def after_sign_up_path_for(resource)
-    customer_path(current_customer)
+    customers_my_page_path(current_customer)
   end
 
   # GET /resource/sign_up
