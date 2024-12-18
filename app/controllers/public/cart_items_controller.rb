@@ -31,7 +31,7 @@ class Public::CartItemsController < ApplicationController
     if cart_item.update(cart_item_amount_params)
       redirect_to cart_items_path
     else
-      render :index
+      redirect_to cart_items_path
     end
   end
 
