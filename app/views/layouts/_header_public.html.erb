@@ -15,7 +15,7 @@
     <ul class="nav-list">
       <% if customer_signed_in? %>
         <li class="nav-list-item">
-          <%= link_to "マイページ", customer_path(current_customer), class: "btn btn-outline-dark" %>
+          <%= link_to "マイページ", customers_my_page_path(current_customer), class: "btn btn-outline-dark" %>
         </li>
         <li class="nav-list-item">
           <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %>
