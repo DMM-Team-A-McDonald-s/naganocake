@@ -27,10 +27,14 @@
       <td style="font-size: 1.3em; font-weight: bold;">￥<%= number_with_delimiter(@item.tax_included_price) %>(税込)</td>
     </tr>
   </table>
-  <%= form_with model: @item, local: true do |f| %>
+  <%= form_with model: @cart_item, url:  cart_items_path, method: :post, local: true do |f| %>
     <div class="form-group d-flex align-items-center">
-      <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: "個数選択" }, class: "form-select", aria: { label: "個数選択" } %> 
-      <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
+      <% if customer_signed_in? %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.hidden_field :customer_id, :value => current_customer.id %>
+        <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: '個数選択' }, class: "form-select" %> 
+        <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
+      <% end %>
     </div>
   <% end %>
 </div>
