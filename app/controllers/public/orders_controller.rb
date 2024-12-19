@@ -45,11 +45,11 @@ class Public::OrdersController < ApplicationController
     end
     total_payment = total_cost + 800
     
-    Order.create(
+    order = Order.create(
       customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
        shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
     )
-    order = Order.find_by(customer_id: current_customer.id)
+    
 
     @cart_items.each do |cart_item|
       OrderDetail.create(
@@ -69,6 +69,11 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+    @order_items = Order.where(customer_id: current_customer.id)
+
+    # @order_items = current_customer.orders.includes(:items) # 現在のカスタマーの注文とその関連商品を取得end
+    # @order = Order.find(params[:id]) # 注文情報を取得
+    # @order_items = @order.items # 注文に関連する商品を取得
   end
 
   private
