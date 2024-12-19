@@ -32,8 +32,8 @@
     </tbody>
   </table>
 
-  <div class = "page mx-auto text-center">
-    1 2 3 Next> Last>>
-    <%# ここは仮です %>
+  <div class = "d-flex justify-content-center">
+    <%= paginate @orders %>
+    <%# <%= paginate @orders, theme: 'bootstrap-5' %> 
   </div>
 </div>
