@@ -1,8 +1,13 @@
 class Public::ItemsController < ApplicationController
 
 def index
-  @items = Item.page(params[:page]).per(8)
   @total_items = Item.count
+
+  if params[:genre_id].present?
+    @items = Item.where(genre_id: params[:genre_id])
+  else
+    @items = Item.page(params[:page]).per(8)
+  end
 end
 
 def show
