@@ -13,7 +13,7 @@ class Public::OrdersController < ApplicationController
     @main_total = 0
     
     if params[:order][:address_option] == "1"
-      @postal_code = address_display(@customer)
+      @postal_code =@customer.postal_code
       @address = @customer.address
       @address_name = @customer.last_name + @customer.first_name
     elsif params[:order][:address_option] == "2"
@@ -31,10 +31,10 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @payment = params[:order][:payment_method]
-    @postal_code = params[:order][:postal_code]
-    @address = params[:order][:address]
-    @name = params[:order][:name]
+    postal_code = params[:order][:postal_code]
+    address = params[:order][:address]
+    name = params[:order][:name]
+    payment_method = params[:order][:payment_method]
 
     @cart_items = CartItem.where(customer_id: current_customer.id)
 
@@ -43,11 +43,23 @@ class Public::OrdersController < ApplicationController
       sub_cost =  cart_item.item.price * 1.1 * cart_item.amount.floor
       total_cost += sub_cost
     end
-    @main_total = total_cost + 800
+    total_payment = total_cost + 800
     
-    @order = Order.new()
+    Order.create(
+      customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
+       shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
+    )
+    order = Order.find_by(customer_id: current_customer.id)
 
-    # redirect_to complete_orders_path
+    @cart_items.each do |cart_item|
+      OrderDetail.create(
+        order_id: order.id, item_id: cart_item.item.id, price: cart_item.item.price * 1.1, amount: cart_item.amount, making_status: 0
+      )
+    end
+    
+    @cart_items.destroy_all
+
+    redirect_to complete_orders_path
 
   end
 
@@ -61,8 +73,8 @@ class Public::OrdersController < ApplicationController
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
   end
 
-  def with_tax_price
-    (price * 1.1).floor
-  end
+  # def with_tax_price
+  #   (price * 1.1).floor
+  # end
 
 end
