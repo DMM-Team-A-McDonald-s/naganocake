@@ -39,12 +39,12 @@
         </thead>
         <tbody>
           <%# コントローラーで注文のorder_detailsをまとめた@order_detailsを作成 %>
-          <%# <% @order_details.item.each do |order|%> 
+          <% @order.order_details.each do |order_detail|%> 
           <tr>
-            <td class="text-break">order.items.name</td>
-            <td class="text-break">order.items.price*1.1</td>
-            <td class="text-break">order.order_details.amount</td>
-            <td class="text-break">order.items.price*1.1*order.order_details.amount</td>
+            <td class="text-break"><%= order_detail.item.name %></td>
+            <td class="text-break"><%= (order_detail.item.price*1.1).floor.to_s(:delimited) %></td>
+            <td class="text-break"><%= order_detail.amount %></td>
+            <td class="text-break"><%= (order_detail.item.price*1.1*order_detail.amount).floor.to_s(:delimited) %></td>
             <td>
               <select>
                 <option value="">着手不可</option>
@@ -55,7 +55,7 @@
             <td><button type="button" class="btn btn-success text-nowrap">更新</button></td>
           </tr>
           <%# <% item_price_box << order.items.price*1.1*order.order_details.amount %> 
-          <%# <% end %> 
+          <% end %> 
         </tbody>
       </table>
     <div class="right_box col-3 offset-1 d-flex align-items-end">
