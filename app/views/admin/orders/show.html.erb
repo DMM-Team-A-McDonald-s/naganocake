@@ -5,13 +5,14 @@
 <div class="customer_info offset-1">
   <dl class="row">
     <dt class="col-2">購入者</dt>
-    <dd class="col-10">@order.customer.last_name @order.customer</dd>
+    <dd class="col-10"><%= @order.customer.last_name %><%= @order.customer.first_name %></dd>
     <dt class="col-2">注文日</dt>
-    <dd class="col-10">@order.created_at</dd>
+    <dd class="col-10"><%= @order.created_at.strftime("%Y-%m-%d") %></dd>
     <dt class="col-2">配送先</dt>
-    <dd class="col-10">〒@order.postal_code @order.address @order.address.name</dd>
+    <dd class="col-10">〒<%= @order.postal_code %><%= @order.address %>
+    <p><%= @order.name %></p></dd>
     <dt class="col-2">支払い方法</dt>
-    <dd class="col-10">@order.payment_method</dd>
+    <dd class="col-10"><%= @order.payment_method %></dd>
     <dt class="col-2">注文ステータス</dt>
     <dd class="col-2">
       <select>
