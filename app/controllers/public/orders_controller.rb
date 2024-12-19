@@ -67,7 +67,16 @@ class Public::OrdersController < ApplicationController
 
   end
 
+  def index
+    @orders = current_customer.orders
+  end
+
   private
+
+  # def order_params
+  #   params.require(:order).permit(:postal_code, :address, :name,
+  #   :shipping_cost, :total_payment, :payment_method, :status)
+  # end
 
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
