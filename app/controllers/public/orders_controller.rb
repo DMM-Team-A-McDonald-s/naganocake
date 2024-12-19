@@ -36,7 +36,19 @@ class Public::OrdersController < ApplicationController
     @address = params[:order][:address]
     @name = params[:order][:name]
 
+    @cart_items = CartItem.where(customer_id: current_customer.id)
+
+    total_cost = 0
+    @cart_items.each do |cart_item|
+      sub_cost =  cart_item.item.price * 1.1 * cart_item.amount.floor
+      total_cost += sub_cost
+    end
+    @main_total = total_cost + 800
     
+    @order = Order.new()
+
+    # redirect_to complete_orders_path
+
   end
 
   def complete
@@ -47,6 +59,10 @@ class Public::OrdersController < ApplicationController
 
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
+  end
+
+  def with_tax_price
+    (price * 1.1).floor
   end
 
 end
