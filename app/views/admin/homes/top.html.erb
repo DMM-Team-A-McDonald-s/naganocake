@@ -1,6 +1,5 @@
-<h1>Header</h1>
 <div class="col-md-8 mx-auto">
-  <h5 class="my-3 ml-3">注文履歴</h5>
+  <h5 class="my-3 ml-3">注文履歴一覧</h5>
   <table class="table">
     <thead class="thead-light">
       <tr>
@@ -11,24 +10,25 @@
       </tr>
     </thead>
     <tbody>
+      <% @orders.each do |order| %>
       <tr>
-        <th scope="row"><a href="">order.created_at</a></th>
-        <td>order.customer.first_name order.customer.last_name</td>
-        <td>order.order_details.amount</td>
-        <td>order.status</td>
+        <th scope="row">
+          <%= link_to order.created_at.strftime("%Y-%m-%d"), admin_order_path(order.id) %>
+        </th>
+        <td><%= order.customer.first_name %>&ensp;<%= order.customer.last_name %></td>
+        <td>
+          <% total = 0 %>
+          <% order.order_details.each do |order_detail| %>
+            <% if order_detail.order_id == order.id %>
+              <% total += order_detail.amount %>
+            <% end %>
+          <% end %>
+          <%= total %>
+        </td>
+        <td><%= order.status %></td>
+        <%# enumステータスの記述があるプルリクをマージしたら修正 %>
       </tr>
-      <tr>
-        <th scope="row"><a href="">order.created_at</a></th>
-        <td>order.customer.first_name order.customer.last_name</td>
-        <td>order.order_details.amount</td>
-        <td>order.status</td>
-      </tr>
-      <tr>
-        <th scope="row"><a href="">order.created_at</a></th>
-        <td>order.customer.first_name order.customer.last_name</td>
-        <td>order.order_details.amount</td>
-        <td>order.status</td>
-      </tr>
+      <% end %>
     </tbody>
   </table>
 
