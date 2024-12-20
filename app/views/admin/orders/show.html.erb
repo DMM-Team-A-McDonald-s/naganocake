@@ -52,16 +52,18 @@
         </thead>
         <tbody>
           <% @order.order_details.each do |order_detail| %> 
-            <tr>
-              <%= form_with model: order_detail, url: admin_order_orders_detail_path(@order, order_detail), method: :patch, local: true do |f| %>
+            <%= form_with model: order_detail, url: admin_order_order_detail_path(@order, order_detail), method: :patch, local: true do |f| %>
+              <tr>
                 <td><%= order_detail.item.name %></td>
                 <td><%= (order_detail.item.price*1.1).floor.to_s(:delimited) %></td>
                 <td><%= order_detail.amount %></td>
                 <td><%= (order_detail.item.price*1.1*order_detail.amount).floor.to_s(:delimited) %></td>
-                <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map { |key| [I18n.t("enums.order_detail.making_status.#{key}"), key] }, {}, class: "form-control" %></td>
+                <td>
+                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |key| [I18n.t("enums.order_detail.making_status.#{key}"), key] }, {}, class: "form-control" %>
+                </td>
                 <td><%= f.submit "更新", class: "btn btn-success" %></td> 
-              <% end %>
-            </tr> 
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table> 
