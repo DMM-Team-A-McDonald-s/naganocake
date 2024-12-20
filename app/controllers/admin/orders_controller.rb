@@ -1,9 +1,38 @@
 class Admin::OrdersController < ApplicationController
+  before_action :set_order, only: [:update]
 
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      if @order.status == "payment_confirmed"
+        @order.order_details.update_all(making_status: :not_started)
+      end
+      redirect_to admin_order_path(@order)
+    else
+      render :show
+    end
+  end
+    
   def show
-    # @order = Order.find(params[:id])
+    @order = Order.find(params[:id])
     # @order_details = Order_details.where(order_id[@order.id])
   end
 
-  
+  private
+    def set_order
+      @order = Order.find(params[:id])
+    end
+
+    def order_params
+      params.require(:order).permit(:status)
+    end
+
+    def update_order_status
+      @order.status ||= :waiting_for_payment
+      if @order.order_details.any? { |detail| detail.in_production? }
+        @order.update(status: :in_production)
+      elsif @order.order_details.any? { |detail| detail.completed? }
+        @order.update(status: :ready_to_ship)
+      end
+    end
 end
