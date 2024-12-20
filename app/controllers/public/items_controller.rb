@@ -4,7 +4,8 @@ def index
   @total_items = Item.count
 
   if params[:genre_id].present?
-    @items = Item.where(genre_id: params[:genre_id])
+    @genre = Genre.find(params[:genre_id])
+    @items = Item.where(genre_id: params[:genre_id]).page(params[:page]).per(8)
   else
     @items = Item.page(params[:page]).per(8)
   end

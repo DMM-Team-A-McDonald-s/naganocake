@@ -9,7 +9,11 @@
 
     <div class="col-md-9">    
       <div class="mb-5 text-left">
-        <h2>商品一覧(全<%= @total_items %>件)</h2>
+        <% if @genre %>
+          <h2><%= @genre.name %>一覧(全<%= @items.total_count %>件)</h2>
+        <% else %>
+          <h2>商品一覧(全<%= @total_items %>件)</h2>
+        <% end %>
       </div>
 
       <div class="d-flex flex-wrap">
@@ -17,9 +21,9 @@
           <%= link_to item_path(item.id), class: "text-decoration-none w-25" do %>
         <div class="card m-2 p-1 card-hover" style="width: 12rem;">
           <%= image_tag item.image.variant(resize_to_fill: [50, 50]), class: "card-img-top rounded shadow-sm" if item.image.attached? %>
-        <div class="card-body text-body">
-          <h5 class="card-title text-primary"><%= item.name %></h5>
-          <p class="card-text text-primary">￥<%= item.price %></p>
+          <div class="card-body text-body">
+            <h5 class="card-title text-primary"><%= item.name %></h5>
+            <p class="card-text text-primary">￥<%= item.price %></p>
         </div>
       </div>
     <% end %>
