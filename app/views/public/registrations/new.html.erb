@@ -2,11 +2,13 @@
   <%= flash[:notice] %>
 </div>
 
-<h4>新規会員登録</h4>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 <div class="container">
+<div class="row">
+<div class="col-md">
+<h4>新規会員登録</h4>
+
   <div class="row mb-2">
     <div class="col-3 d-flex justify-content-between pr-1 field" style="height: 30px;">
       <p>名前</p>
@@ -38,7 +40,7 @@
       <%= f.label :email, "メールアドレス" %>
     </div>
     <div class="col-4 pl-0 align-items-center">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", size: 30 %>
+      <%= f.email_field :email, autocomplete: "email", size: 30 %>
     </div>
   </div>
   <div class="row mb-2">
@@ -91,8 +93,11 @@
       <%= f.submit "新規登録", class:"btn btn-success w-100" %>
     </div>
   </div>
+  <h4>既に登録済みの方</h4>
+  <%= render "public/shared/links" %>からログインしてください
+</div>
+</div>
 </div>
 <% end %>
 
-<h4>既に登録済みの方</h4>
-<%= render "public/shared/links" %>からログインしてください
+
