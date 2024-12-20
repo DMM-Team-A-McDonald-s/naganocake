@@ -15,7 +15,7 @@
         <th scope="row">
           <%= link_to order.created_at.strftime("%Y-%m-%d"), admin_order_path(order.id) %>
         </th>
-        <td><%= order.customer.first_name %>&ensp;<%= order.customer.last_name %></td>
+        <td><%= order.customer.last_name %>&ensp;<%= order.customer.first_name %></td>
         <td>
           <% total = 0 %>
           <% order.order_details.each do |order_detail| %>
