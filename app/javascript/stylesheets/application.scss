@@ -56,3 +56,8 @@
   text-align: right;
 }
 
+// エラーメッセージ用のスタイル
+// エラーメッセージが表示された際にレイアウトが崩れるのを防ぐため
+.field_with_errors {
+  display: contents;
+}

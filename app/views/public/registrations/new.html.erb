@@ -12,10 +12,10 @@
       <p>名前</p>
       <%= f.label :last_name, "(姓)　" %>
     </div>
-    <div class="col-4 pl-0" style="height: 30px;">
+    <div class="col-4 px-0" style="height: 30px;">
       <%= f.text_field :last_name, autofocus: true, size: 30 %>
     </div>
-    <div class="col-4" style="height: 30px;">
+    <div class="col-4 px-0" style="height: 30px;">
       <%= f.label :first_name, "(名)　" %>
       <%= f.text_field :first_name, size: 30 %>
     </div>
@@ -25,10 +25,10 @@
       <p>フリガナ<p>
       <%= f.label :last_name_kana, "(セイ)" %>
     </div>
-    <div class="col-4 pl-0" style="height: 30px;">
+    <div class="col-4 px-0" style="height: 30px;">
       <%= f.text_field :last_name_kana, size: 30 %>
     </div>
-    <div class="col-4" style="height: 30px;">
+    <div class="col-4 pl-0" style="height: 30px;">
       <%= f.label :first_name_kana, "(メイ)" %>
       <%= f.text_field :first_name_kana, size: 30 %>
     </div>
@@ -76,7 +76,7 @@
       <%= f.password_field :password, autocomplete: "new-password", size: 30 %>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-3 field">
       <%= f.label :password_confirmation, "パスワード(確認用)" %>
     </div>
@@ -85,9 +85,13 @@
     </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "新規登録" %>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-2 pl-0 actions">
+      <%= f.submit "新規登録", class:"btn btn-success w-100" %>
+    </div>
   </div>
+</div>
 <% end %>
 
 <h4>既に登録済みの方</h4>
