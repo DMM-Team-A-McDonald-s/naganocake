@@ -7,67 +7,82 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 <div class="container">
-  <div class="row">
-    <div class="col-3 d-flex justify-content-between pr-0 field">
+  <div class="row mb-2">
+    <div class="col-3 d-flex justify-content-between pr-1 field" style="height: 30px;">
       <p>名前</p>
       <%= f.label :last_name, "(姓)　" %>
     </div>
-    <div class="col-4 pl-0">
+    <div class="col-4 pl-0" style="height: 30px;">
       <%= f.text_field :last_name, autofocus: true, size: 30 %>
     </div>
-    <div class="col-4">
+    <div class="col-4" style="height: 30px;">
       <%= f.label :first_name, "(名)　" %>
       <%= f.text_field :first_name, size: 30 %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-3 d-flex justify-content-between pr-0 field">
+  <div class="row mb-2">
+    <div class="col-3 d-flex justify-content-between pr-1 field" style="height: 30px;">
       <p>フリガナ<p>
       <%= f.label :last_name_kana, "(セイ)" %>
     </div>
-    <div class="col-4">
+    <div class="col-4 pl-0" style="height: 30px;">
       <%= f.text_field :last_name_kana, size: 30 %>
     </div>
-    <div class="col-4">
+    <div class="col-4" style="height: 30px;">
       <%= f.label :first_name_kana, "(メイ)" %>
       <%= f.text_field :first_name_kana, size: 30 %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-2 field">
+  <div class="row mb-2">
+    <div class="col-3 align-items-center">
       <%= f.label :email, "メールアドレス" %>
     </div>
-    <div class="col-4">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" , size: 30 %>
+    <div class="col-4 pl-0 align-items-center">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", size: 30 %>
     </div>
   </div>
-</div>
-  <div class="field">
-    <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
-    <%= f.text_field :postal_code %>
+  <div class="row mb-2">
+    <div class="col-3 field">
+      <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+    </div>
+    <div class="col-4 pl-0">
+      <%= f.text_field :postal_code, size: 30 %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address %>
+  <div class="row mb-2">
+    <div class="col-3 field">
+      <%= f.label :address, "住所" %>
+    </div>
+    <div class="col-4 pl-0">
+      <%= f.text_field :address, size: 30 %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :telephone_number, "電話番号(ハイフンなし)" %>
-    <%= f.text_field :telephone_number %>
+  <div class="row mb-2">
+    <div class="col-3 field">
+      <%= f.label :telephone_number, "電話番号(ハイフンなし)" %>
+    </div>
+    <div class="col-4 pl-0">
+      <%= f.text_field :telephone_number, size: 30 %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %>
-    <% if @minimum_password_length %>
-    (<%= @minimum_password_length %>文字以上)
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="row mb-2">
+    <div class="col-3 field">
+      <%= f.label :password, "パスワード" %>
+      <% if @minimum_password_length %>
+        (<%= @minimum_password_length %>文字以上)
+      <% end %>
+    </div>
+    <div class="col-4 pl-0">
+      <%= f.password_field :password, autocomplete: "new-password", size: 30 %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "パスワード(確認用)" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="row">
+    <div class="col-3 field">
+      <%= f.label :password_confirmation, "パスワード(確認用)" %>
+    </div>
+    <div class="col-4 pl-0">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 30 %>
+    </div>
   </div>
 
   <div class="actions">
