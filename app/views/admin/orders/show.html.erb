@@ -5,14 +5,14 @@
 <div class="customer_info offset-1">
   <dl class="row">
     <dt class="col-2">購入者</dt>
-    <dd class="col-10"><%= @order.customer.last_name %><%= @order.customer.first_name %></dd>
+    <dd class="col-10 "><%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}", admin_customer_path(@order.customer_id) %></dd>
     <dt class="col-2">注文日</dt>
-    <dd class="col-10"><%= @order.created_at.strftime("%Y-%m-%d") %></dd>
+    <dd class="col-10"><%= @order.created_at.strftime("%Y/%m/%d") %></dd>
     <dt class="col-2">配送先</dt>
-    <dd class="col-10">〒<%= @order.postal_code %><%= @order.address %>
+    <dd class="col-10">〒<%= @order.postal_code.to_s.insert(3, "-") %>&emsp;<%= @order.address %>
     <p><%= @order.name %></p></dd>
     <dt class="col-2">支払い方法</dt>
-    <dd class="col-10"><%= @order.payment_method %></dd>
+    <dd class="col-10"><%= I18n.t(@order.payment_method, scope: ["enums", "order", "payment_method"]) %></dd>
     <dt class="col-2">注文ステータス</dt>
     <dd class="col-2">
       <select>
@@ -20,6 +20,7 @@
         <option value="">製作中</option>
         <option value="">発送済み</option>
       </select>
+      <%# 12/19 注文ステータス機能は未実装 %>
     </dd>
     <button type="button" class="btn btn-success">更新</button>
   </dl>
@@ -38,7 +39,6 @@
           </tr>
         </thead>
         <tbody>
-          <%# コントローラーで注文のorder_detailsをまとめた@order_detailsを作成 %>
           <% @order.order_details.each do |order_detail|%> 
           <tr>
             <td class="text-break"><%= order_detail.item.name %></td>
@@ -52,6 +52,7 @@
                 <option value="">制作完了</option>
               </select>
             </td>
+            <%# 12/19 制作ステータス機能は未実装 %>
             <td><button type="button" class="btn btn-success text-nowrap">更新</button></td>
           </tr>
           <%# <% item_price_box << order.items.price*1.1*order.order_details.amount %> 
@@ -61,15 +62,19 @@
     <div class="right_box col-3 offset-1 d-flex align-items-end">
         <dl class="row">
           <dt class="col-6">商品合計</dt>
-          <%# <% product_total=0  %> 
-          <%# <% item_price_box.each do |order_amount| %> 
-            <%# <% product_total = product_total + order_amount %> 
-          <%# <% end %> 
-          <dd class="col-6">product_total</dd>
+          <dd class="col-6 text-right">
+            <% total = 0 %>
+            <% @order.order_details.each do |order_detail| %>
+              <% if order_detail.order_id == @order.id %>
+                <% total += (order_detail.item.price*1.1*order_detail.amount).floor %>
+              <% end %>
+            <% end %>
+            <%= total.to_s(:delimited) %>円
+          </dd>
           <dt class="col-6">送料</dt>
-          <dd class="col-6">@order.shipping_cost</dd>
+          <dd class="col-6 text-right"><%= @order.shipping_cost %>円</dd>
           <dt class="col-6">請求金額合計</dt>
-          <dd class="col-6">@order.total_payment</dd>
+          <dd class="col-6 text-right"><%= @order.total_payment.to_s(:delimited) %>円</dd>
         </dl>
     </div>
   </div>
