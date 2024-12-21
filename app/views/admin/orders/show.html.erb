@@ -18,17 +18,20 @@
             </tr>
             <tr>
               <td>配送先</td>
-              <td>〒<%= @order.postal_code %></td>
+              <td>〒<%= @order.postal_code %><br>
+                  <%= @order.address %><br>
+                  <%= @order.name %>
+              </td>
             </tr>
             <tr>
               <td>支払い方法</td>
-              <td><%= @order.payment_method %></td>
+              <td><%= I18n.t(@order.payment_method, scope: ["enums", "order", "payment_method"]) %></td>
             </tr>
             <tr>
               <td>注文ステータス</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <%= f.select :status, Order.statuses.keys.map { |key| [I18n.t("enums.order.status.#{key}"), key] }, {}, class: "form-control" %>
+                  <%= f.select :status, Order.statuses.keys.map { |key| [I18n.t(key, scope: ["enums", "order", "status"]), key] }, {}, class: "form-control" %>
                   <%= f.submit "更新", class: "btn btn-success ml-3" %>
                 </div>
               </td>
@@ -59,7 +62,7 @@
                 <td><%= order_detail.amount %></td>
                 <td><%= (order_detail.item.price*1.1*order_detail.amount).floor.to_s(:delimited) %></td>
                 <td>
-                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |key| [I18n.t("enums.order_detail.making_status.#{key}"), key] }, {}, class: "form-control" %>
+                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |key| [I18n.t(key, scope: ["enums", "order_detail", "making_status"]), key] }, {}, class: "form-control" %>
                 </td>
                 <td><%= f.submit "更新", class: "btn btn-success" %></td> 
               </tr>
@@ -73,7 +76,7 @@
       <table class="table table-borderless">
         <tbody>
           <tr>
-            <td>商品合計</td>
+            <td><strong>商品合計</strong></td>
             <td>
               <% total = 0 %>
                 <% @order.order_details.each do |order_detail| %>
@@ -85,12 +88,12 @@
             </td>
           </tr>
           <tr>
-            <td>送料</td>
+            <td><strong>送料</strong></td>
             <td><%= @order.shipping_cost %>円</td>
           </tr>
           <tr>
-            <td>請求金額合計</td>
-            <td><%= @order.total_payment.to_s(:delimited) %>円</td>
+            <td><strong>請求金額合計</strong></td>
+            <td><strong><%= @order.total_payment.to_s(:delimited) %>円</strong></td>
           </tr>
         </tbody>
       </table>

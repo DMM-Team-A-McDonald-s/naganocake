@@ -19,7 +19,7 @@
         <tbody>
           <% @orders.each do |order| %>
           <tr>
-            <td><%= order.created_at.strftime("%Y-%m-%d") %></td>
+            <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
             <td><%= order.address %></td>
             <td>
               <% order.items.each do |item| %>

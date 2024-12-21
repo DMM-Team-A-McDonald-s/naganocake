@@ -1,5 +1,5 @@
 class Admin::OrdersController < ApplicationController
-  before_action :set_order, only: [:update]
+  before_action :set_order, only: [:update, :show]
 
   def update
     @order = Order.find(params[:id])
@@ -29,10 +29,10 @@ class Admin::OrdersController < ApplicationController
 
     def update_order_status
       @order.status ||= :waiting_for_payment
-      if @order.order_details.any? { |detail| detail.in_production? }
-        @order.update(status: :in_production)
-      elsif @order.order_details.any? { |detail| detail.completed? }
+      if @order.order_details.all? { |detail| detail.completed? }
         @order.update(status: :ready_to_ship)
+      elsif @order.order_details.any? { |detail| detail.in_production? }
+        @order.update(status: :in_production)
       end
     end
 end
