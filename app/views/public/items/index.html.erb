@@ -22,11 +22,11 @@
           <div class="card-body text-body">
             <h5 class="card-title text-primary"><%= item.name %></h5>
             <p class="card-text text-primary">￥<%= item.price %></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
   <div>
     <%= paginate @items %>
