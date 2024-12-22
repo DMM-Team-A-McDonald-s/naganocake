@@ -23,10 +23,9 @@
             <h5 class="card-title text-primary"><%= item.name %></h5>
             <p class="card-text text-primary">￥<%= number_to_currency(item.price, unit: '', delimiter: ',') %></p>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
   <div>
     <%= paginate @items %>
