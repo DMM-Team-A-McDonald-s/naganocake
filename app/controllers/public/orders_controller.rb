@@ -71,10 +71,11 @@ def new
   def index
     @orders = current_customer.orders
     @order_items = Order.where(customer_id: current_customer.id)
+  end
 
-    # @order_items = current_customer.orders.includes(:items) # 現在のカスタマーの注文とその関連商品を取得end
-    # @order = Order.find(params[:id]) # 注文情報を取得
-    # @order_items = @order.items # 注文に関連する商品を取得
+  def show
+    @order = current_customer.orders.find(params[:id])
+    @order_details = @order.order_details
   end
 
   private
@@ -86,9 +87,5 @@ def new
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
   end
-
-  # def with_tax_price
-  #   (price * 1.1).floor
-  # end
 
 end

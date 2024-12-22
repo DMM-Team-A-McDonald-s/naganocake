@@ -1,0 +1,3 @@
+<% genres.each do |genre| %>
+  <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
+<% end %>
