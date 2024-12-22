@@ -21,7 +21,7 @@
           <%= image_tag item.image.variant(resize_to_fill: [50, 50]), class: "card-img-top rounded shadow-sm" if item.image.attached? %>
           <div class="card-body text-body">
             <h5 class="card-title text-primary"><%= item.name %></h5>
-            <p class="card-text text-primary">￥<%= item.price %></p>
+            <p class="card-text text-primary">￥<%= number_to_currency(item.price, unit: '', delimiter: ',') %></p>
         </div>
       </div>
     <% end %>
