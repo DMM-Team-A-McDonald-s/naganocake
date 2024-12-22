@@ -1,32 +1,38 @@
-<div class="mt-4 ml-5 mb-5">
-  <h4 class="ml-5">
-    <span class="bg-light ml-5"><b>管理者</b>ログイン</span>
-  </h4>
-</div>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <div class="container">
-  <div class="row justify-content-center mb-3">
-    <div class="col-2">
-      <%= f.label :メールアドレス %>
+  <div class="row">
+    <div class="col">
+
+      <div class="mt-4 ml-5 mb-5">
+        <h4 class="ml-5">
+          <span class="bg-light ml-5"><b>管理者</b>ログイン</span>
+        </h4>
+      </div>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row justify-content-center mb-3">
+        <div class="col-2">
+          <%= f.label :メールアドレス %>
+        </div>
+        <div class="col-4">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"w-100" %>
+        </div>
+      </div>
+
+      <div class="row justify-content-center mb-4">
+        <div class="col-2">
+          <%= f.label :パスワード %>
+        </div>
+        <div class="col-4">
+          <%= f.password_field :password, autocomplete: "current-password", class:"w-100" %>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-2 actions">
+          <%= f.submit "ログイン", class:"btn btn-primary w-100" %>
+        </div>
+      </div>
     </div>
-    <div class="col-4">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"w-100" %>
-    </div>
-  </div>
-  <div class="row justify-content-center mb-4">
-    <div class="col-2">
-      <%= f.label :パスワード %>
-    </div>
-    <div class="col-4">
-      <%= f.password_field :password, autocomplete: "current-password", class:"w-100" %>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-2 actions">
-      <%= f.submit "ログイン", class:"btn btn-primary w-100" %>
-    </div>
-  </div>
-</div>
-<% end %>
-<%= render "admin/shared/links" %>
+    <% end %>
+    <%= render "admin/shared/links" %>
+    
