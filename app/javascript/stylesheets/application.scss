@@ -56,3 +56,19 @@
   text-align: right;
 }
 
+//ページネーション用のスタイル
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-item.active .page-link {
+  background-color: #424242;
+  border-color: #424242;
+}
+
+.page-link {
+  color: #424242;
+}
+
+

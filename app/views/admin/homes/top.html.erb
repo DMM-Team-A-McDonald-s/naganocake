@@ -13,7 +13,7 @@
       <% @orders.each do |order| %>
       <tr>
         <th scope="row">
-          <%= link_to order.created_at.strftime("%Y-%m-%d"), admin_order_path(order.id) %>
+          <%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"), admin_order_path(order.id) %>
         </th>
         <td><%= order.customer.last_name %>&ensp;<%= order.customer.first_name %></td>
         <td>
@@ -32,9 +32,7 @@
     </tbody>
   </table>
 
-  <div class = "d-flex justify-content-center">
+  <div>
     <%= paginate @orders %>
-    <%# <%= paginate @orders, theme: 'bootstrap-5' %> 
-    <%# ページネーションのスタイルがうまく機能しない問題あり %>
   </div>
 </div>
