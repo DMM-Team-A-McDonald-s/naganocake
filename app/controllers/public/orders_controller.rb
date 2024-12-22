@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
-  def new
+
+def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
     @customer_address = address_display(@customer)
@@ -47,7 +48,7 @@ class Public::OrdersController < ApplicationController
     
     order = Order.create(
       customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
-       shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
+      shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
     )
     
 
@@ -70,14 +71,14 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = current_customer.orders
     @order_items = Order.where(customer_id: current_customer.id)
+  end
 
-    # @order_items = current_customer.orders.includes(:items) # 現在のカスタマーの注文とその関連商品を取得end
-    # @order = Order.find(params[:id]) # 注文情報を取得
-    # @order_items = @order.items # 注文に関連する商品を取得
+  def show
+    @order = current_customer.orders.find(params[:id])
+    @order_details = @order.order_details
   end
 
   private
-
   # def order_params
   #   params.require(:order).permit(:postal_code, :address, :name,
   #   :shipping_cost, :total_payment, :payment_method, :status)
@@ -86,9 +87,5 @@ class Public::OrdersController < ApplicationController
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
   end
-
-  # def with_tax_price
-  #   (price * 1.1).floor
-  # end
 
 end
