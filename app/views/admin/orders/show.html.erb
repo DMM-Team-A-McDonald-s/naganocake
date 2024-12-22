@@ -9,7 +9,9 @@
           <tbody>
             <tr>
               <td><strong>購入者</strong></td>
-              <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+              <td>
+                <%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}", admin_customer_path(@order.customer), class: "text-decoration-none" %>
+              </td>
             </tr>
             <tr>
               <td><strong>注文日</strong></td>
