@@ -1,6 +1,5 @@
 class Public::OrdersController < ApplicationController
-
-def new
+  def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
     @customer_address = address_display(@customer)
@@ -48,7 +47,7 @@ def new
     
     order = Order.create(
       customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
-      shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
+       shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
     )
     
 
@@ -79,10 +78,6 @@ def new
   end
 
   private
-  # def order_params
-  #   params.require(:order).permit(:postal_code, :address, :name,
-  #   :shipping_cost, :total_payment, :payment_method, :status)
-  # end
 
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
