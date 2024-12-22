@@ -198,4 +198,15 @@ ja:
       short: "%m/%d %H:%M"
     pm: 午後
 
-    
+  activerecord:
+    attributes:
+      customer:
+        last_name: 姓
+        first_name: 名
+        last_name_kana: セイ
+        first_name_kana: メイ
+        postal_code: 郵便番号
+        address: 住所
+        telephone_number: 電話番号
+        email: メールアドレス
+        password: パスワード
