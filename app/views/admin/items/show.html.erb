@@ -32,7 +32,11 @@
       </tr>
       <tr>
         <th>販売ステータス</th>
-        <td><%= @item.status_label %></td>
+        <td><%= @item.is_active ?
+              content_tag(:span, '販売中', class: 'text-success') : 
+              content_tag(:span, '販売停止中', class: 'text-secondary') 
+            %>
+        </td><%= @item.status_label %></td>
       </tr>
     </table>
   </div>
@@ -40,5 +44,5 @@
 </div>
 
 <div class="text-center mt-3">
-  <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
+  <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success mb-5" %>
 </div>
