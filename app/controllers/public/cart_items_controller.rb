@@ -7,6 +7,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+    
     if CartItem.find_by(item_id: params[:cart_item][:item_id], customer_id: current_customer.id).nil?
       # カート内に同じアイテムがある場合は数量のみを追加するための条件分岐
       @cart_item = CartItem.new(cart_item_params)

@@ -2,9 +2,14 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
   def new
-    @order = Order.new
-    @customer = Customer.find(current_customer.id)
-    @customer_address = address_display(@customer)
+    cart_item = CartItem.find_by(customer_id: current_customer.id)
+    if cart_item.present?
+      @order = Order.new
+      @customer = Customer.find(current_customer.id)
+      @customer_address = address_display(@customer)
+    else
+      redirect_to request.referer
+    end
   end
 
   def confirm
