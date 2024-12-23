@@ -17,4 +17,5 @@ class Customer < ApplicationRecord
   validates :address, length: { maximum: 255 }, presence:{ message: 'は必須項目です。' }
 
   validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: 'は10桁または11桁の半角数字のみで入力してください。' }
+  validates :is_active, presence: true
 end

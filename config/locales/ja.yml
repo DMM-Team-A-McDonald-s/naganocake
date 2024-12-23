@@ -220,5 +220,11 @@ ja:
         address: 住所
       admin:
         email: メールアドレス
-      genres:
+      genre:
         name: ジャンル名
+      item:
+        name: 商品名
+        introduction: 商品説明
+        price: 税抜き価格
+        is_active: 販売ステータス
+        image: 商品画像
