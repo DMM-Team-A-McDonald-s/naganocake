@@ -26,7 +26,7 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path, notice: "配送先が更新されました。"
     else
       @addresses = current_customer.addresses
-      render :index
+      render :edit
     end
   end
 
