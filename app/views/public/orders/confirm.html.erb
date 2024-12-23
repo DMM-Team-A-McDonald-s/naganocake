@@ -47,20 +47,31 @@
 </table>
 </div>
 
-<table table-borderless>
-  支払い方法
-<%= I18n.t(@payment, scope: ["enums", "order", "payment_method"]) %>
+<div class="col-12 mt-3">
+  <table table-borderless>
+    <tbody>
+      <tr>
+        <th>支払い方法</th>
+        <td><%= I18n.t(@payment, scope: ["enums", "order", "payment_method"]) %></td>
+      </tr>
+      <tr>
+        <th>お届け先</th>
+        <td>〒<%= @postal_code %> <%= @address %> <%= @address_name  %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-お届け先
-
-〒<%= @postal_code %><%= @address %><%= @address_name  %>
-
-<%= form_with model: @order, url: orders_path , method: :post, local: true do |f| %>
-
-  <%= f.hidden_field :payment_method, :value => @payment %>
-  <%= f.hidden_field :postal_code, :value => @postal_code %>
-  <%= f.hidden_field :address, :value => @address %>
-  <%= f.hidden_field :name, :value => @address_name %>
-  <%= f.submit "注文を確定する", class: "btn btn-primary mt-3" %>
-<% end %>
-</table>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 text-center">
+      <%= form_with model: @order, url: orders_path , method: :post, local: true do |f| %>
+        <%= f.hidden_field :payment_method, :value => @payment %>
+        <%= f.hidden_field :postal_code, :value => @postal_code %>
+        <%= f.hidden_field :address, :value => @address %>
+        <%= f.hidden_field :name, :value => @address_name %>
+        <%= f.submit "注文を確定する", class: "btn btn-success mt-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>
