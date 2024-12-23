@@ -15,7 +15,7 @@ ja:
         unable_to_start: "着手不可"
         not_started: "製作待ち"
         in_production: "製作中"
-        completed: "製作完了"        
+        completed: "製作完了"
   activerecord:
     errors:
       messages:

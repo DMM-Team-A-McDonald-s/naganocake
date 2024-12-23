@@ -1,6 +1,5 @@
 class Public::OrdersController < ApplicationController
-
-def new
+  def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
     @customer_address = address_display(@customer)
@@ -32,10 +31,10 @@ def new
   end
 
   def create
-    postal_code = params[:order][:postal_code]
-    address = params[:order][:address]
-    name = params[:order][:name]
-    payment_method = params[:order][:payment_method]
+    @postal_code = params[:order][:postal_code]
+    @address = params[:order][:address]
+    @name = params[:order][:name]
+    @payment_method = params[:order][:payment_method]
 
     @cart_items = CartItem.where(customer_id: current_customer.id)
 
@@ -44,12 +43,16 @@ def new
       sub_cost =  cart_item.item.price * 1.1 * cart_item.amount.floor
       total_cost += sub_cost
     end
-    total_payment = total_cost + 800
-    
-    order = Order.create(
-      customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
-      shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
-    )
+    @total_payment = total_cost + 800
+
+    order = Order.new(order_params)
+    order.save
+
+
+    # order = Order.create(
+    #   customer_id: current_customer.id, postal_code: postal_code, address: address, name: name,
+    #    shipping_cost: 800, total_payment: total_payment, payment_method: payment_method, status: 0
+    # )
     
 
     @cart_items.each do |cart_item|
@@ -79,13 +82,21 @@ def new
   end
 
   private
-  # def order_params
-  #   params.require(:order).permit(:postal_code, :address, :name,
-  #   :shipping_cost, :total_payment, :payment_method, :status)
-  # end
 
   def address_display(customer)
     '〒' + customer.postal_code + ' ' + customer.address + ' ' 
   end
+
+  def order_params
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name,
+    :shipping_cost, :total_payment, :payment_method, :status).merge(
+      customer_id: current_customer.id, postal_code: @postal_code, address: @address, name: @name,
+       shipping_cost: 800, total_payment: @total_payment, payment_method: @payment_method, status: 0
+    )
+  end
+
+  # def order_detail_params
+  #    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount, :making_status)
+  # end
 
 end
