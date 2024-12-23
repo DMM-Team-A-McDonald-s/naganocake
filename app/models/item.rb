@@ -5,6 +5,10 @@ class Item < ApplicationRecord
   has_many :order_details
   has_many :orders, through: :order_details
 
+  validates :name, presence:true
+  validates :introduction, presence:true, length: {maximum: 200}
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+
   def with_tax_price
     (price * 1.1).floor
   end
