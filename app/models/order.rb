@@ -16,6 +16,10 @@ class Order < ApplicationRecord
   has_many :order_details, dependent: :destroy
   has_many :items, through: :order_details
 
+  validates :name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]{2,20}\z/, message: 'は２文字以上の全角のひらがな、カタカナ、漢字のみで入力してください。' }
+  validates :postal_code, format: { with: /\A\d{7}\z/, message: 'は7桁の半角数字のみで入力してください。' }
+  validates :address, presence: true, length: { maximum: 255 }
+
   def subtotal
     item.with_tax_price * amount
   end
