@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
 
   def index
     @address = Address.new
@@ -15,7 +16,7 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path, notice: "配送先住所が追加されました。"
     else
       @addresses = current_customer.addresses
-      render :index
+      redirect_to addresses_path, notice: "エラー"
     end
   end
 
