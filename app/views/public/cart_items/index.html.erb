@@ -1,9 +1,12 @@
+<div class="mt-3 mb-5 ml-3 text-left">
+  <h2>ショッピングカート</h2>
+</div>
+
 <div class="container">
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
       <div class="d-flex justify-content-between" style="margin: 2% 0 2% 0;">
-        <h5 class="bg-light" style="padding: 0 8px 0 8px;">ショッピングカート</h5>
-        <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: 'カートを空にしますか？' }, class: "btn btn-sm btn-danger" %>
+        <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, data: { confirm: 'カートを空にしますか？' }, class: "btn btn-sm btn-danger ml-auto" %>
       </div>
 
       <table class="table table-bordered">
