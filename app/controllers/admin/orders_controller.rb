@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_order, only: [:update, :show]
 
   def update
