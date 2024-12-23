@@ -15,7 +15,8 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path, notice: "配送先住所が追加されました。"
     else
       @addresses = current_customer.addresses
-      render :index
+      flash[:notice] = @address.errors.full_messages.join(", ")
+      redirect_to addresses_path
     end
   end
 
