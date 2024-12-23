@@ -14,7 +14,7 @@ class Public::CustomersController < ApplicationController
       flash[:notice] = "更新に成功しました。"
       redirect_to customers_my_page_path
     else
-      flash.now[:danger] = "更新できませんでした"
+      #flash.now[:danger] = "更新できませんでした"
       render :edit
     end
   end
