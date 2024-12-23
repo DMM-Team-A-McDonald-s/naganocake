@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td class="table-secondary">ステータス</td>
-          <td><%= @order.status %></td>
+          <td><%= I18n.t(@order.status, scope: ["enums", "order", "status"]) %></td>
         </tr>
       </table>
       </div>
