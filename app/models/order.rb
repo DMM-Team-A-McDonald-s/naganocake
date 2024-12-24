@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   validates :name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]{2,20}\z/, message: 'は２文字以上の全角のひらがな、カタカナ、漢字のみで入力してください。' }
   validates :postal_code, format: { with: /\A\d{7}\z/, message: 'は7桁の半角数字のみで入力してください。' }
   validates :address, presence: true, length: { maximum: 255 }
+  validates :payment_method, presence: true
 
 
   def subtotal
