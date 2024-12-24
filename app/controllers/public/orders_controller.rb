@@ -19,7 +19,7 @@ class Public::OrdersController < ApplicationController
     @payment = params[:order][:payment_method]
     @main_total = 0
 
-    if @postal_code.present? && @address.present? && @name.present? && @payment_method.present?
+    
       if params[:order][:address_option] == "1"
         @postal_code =@customer.postal_code
         @address = @customer.address
@@ -35,7 +35,7 @@ class Public::OrdersController < ApplicationController
         @address = params[:order][:address]
         @address_name = params[:order][:name]
       end
-    else
+    if @postal_code.nil? && @address.nil? && @address_name.nil? && @payment.nil?
       redirect_to request.referer
     end
     
