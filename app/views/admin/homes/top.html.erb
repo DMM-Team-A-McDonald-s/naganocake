@@ -1,0 +1,40 @@
+<div class="mt-3 mb-5 ml-3 text-left">
+  <h2>注文履歴一覧</h2>
+</div>
+
+<div class="col-md-8 mx-auto">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">購入日時</th>
+        <th scope="col">購入者</th>
+        <th scope="col">注文個数</th>
+        <th scope="col">注文ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+      <tr>
+        <th scope="row">
+          <%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"), admin_order_path(order.id) %>
+        </th>
+        <td><%= order.customer.last_name %>&ensp;<%= order.customer.first_name %></td>
+        <td>
+          <% total = 0 %>
+          <% order.order_details.each do |order_detail| %>
+            <% if order_detail.order_id == order.id %>
+              <% total += order_detail.amount %>
+            <% end %>
+          <% end %>
+          <%= total %>
+        </td>
+        <td><%= I18n.t(order.status, scope: ["enums", "order", "status"]) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div>
+    <%= paginate @orders %>
+  </div>
+</div>

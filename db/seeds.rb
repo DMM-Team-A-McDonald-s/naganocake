@@ -5,7 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# db/seeds.rb
+
 Admin.create!(
   email: 'admin@gmail.com',
-  password: 'adminadmin'
+  password: 'password',
+  password_confirmation: 'password',
 )
+
+admin_user = Admin.find_by(email: 'admin@gmail.com')

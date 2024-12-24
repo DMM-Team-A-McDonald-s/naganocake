@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>ジャンル検索</h3>
+      <%= render "public/genres/genre_search" , genres: @genres %>
+    </div>
+    
+<div class="col-md-3">
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, alt: "商品画像", size:'200x200' %>
+  <% else %>
+    <%= image_tag "no-image.png", size: '200x200' %>
+  <% end %>
+</div>
+
+<div class="col-md-6">
+  <table class='table table-borderless'>
+    <tr>
+	    <td style="font-size: 1.5em; font-weight: bold;"><%= @item.name %></td>
+    </tr>
+    <tr>
+	    <td><%= @item.introduction %></td>
+    </tr>
+    <tr>
+      <td style="font-size: 1.3em; font-weight: bold;">￥<%= number_with_delimiter(@item.tax_included_price) %>(税込)</td>
+    </tr>
+  </table>
+  <%= form_with model: @cart_item, url:  cart_items_path, method: :post, local: true do |f| %>
+    <div class="form-group d-flex align-items-center">
+      <% if customer_signed_in? %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.hidden_field :customer_id, :value => current_customer.id %>
+        <%= f.select :amount, options_for_select((1..100).to_a), { include_blank: '個数選択' }, class: "form-select" %> 
+        <% if @item.is_active == true %>
+          <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+  

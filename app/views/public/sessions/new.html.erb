@@ -1,26 +1,50 @@
-<h2>Log in</h2>
+<div class="container">
+  <div class="row ml-3">
+    <div class="col">
+      <div style="margin: 2% 0 3% 10%;">
+        <h4>
+          <span class="bg-light">ログイン</span>
+        </h4>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div style="margin: 0 0 20px 120px;">
+        <span class="bg-light">会員の方はこちらからログイン</span>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row d-flex justify-content-center mb-3">
+        <div class="col-2">
+          <%= f.label :email ,"メールアドレス" %>
+        </div>
+        <div class="col-4">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"w-100" %>
+        </div>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="row d-flex justify-content-center mb-4">
+        <div class="col-2">
+          <%= f.label :password, "パスワード" %>
+        </div>
+        <div class="col-4">
+          <%= f.password_field :password, autocomplete: "current-password", class:"w-100" %>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-2 actions">
+          <%= f.submit "ログイン", class:"btn btn-primary w-100" %>
+        </div>
+      </div>
+      <% end %>
+
+      <div style="margin: 20px 0 20px 120px;">
+        <span class="bg-light">会員登録がお済み出ない方</span>
+      </div>
+
+      <div style="margin: 0 0 0 300px;">
+        <%= render "public/shared/links" %>から新規登録を行ってください。
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "public/shared/links" %>
