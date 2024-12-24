@@ -34,6 +34,8 @@
   <tr>
     <td>&emsp;&emsp;<%= @customer_address %></td>
   </tr>
+  <% if Address.where(customer_id: current_customer.id).empty? %>
+  <% else %>
   <tr>
     <td>
       &emsp;<%= f.radio_button :address_option, "2" %>
@@ -45,6 +47,7 @@
       &emsp;&emsp;<%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display) %>
     </td>
   </tr>
+   <% end %>
   <tr>
     <td>
       &emsp;<%= f.radio_button :address_option, "3" %> <%= f.label :address, "新しいお届け先" %>
