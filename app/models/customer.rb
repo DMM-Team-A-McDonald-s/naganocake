@@ -8,9 +8,9 @@ class Customer < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
 
-  validates :last_name, :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]{1,20}\z/, message: 'は１文字以上の全角のひらがな、カタカナ、漢字のみで入力してください。' }
+  validates :last_name, :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]{1,20}\z/, message: 'は１字以上の全角のひらがな、カタカナ、漢字のみで入力してください。' }
 
-  validates :last_name_kana, :first_name_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]{1,20}\z/, message: 'は１文字以上のカタカナで入力して下さい。' }
+  validates :last_name_kana, :first_name_kana, format: {with: /\A[ァ-ヶー]+\z/, message: 'は１字以上の全角カタカナで入力して下さい。' }
 
   validates :postal_code, format: { with: /\A\d{7}\z/, message: 'は7桁の半角数字のみで入力してください。' }
   

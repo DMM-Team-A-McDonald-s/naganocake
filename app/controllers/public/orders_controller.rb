@@ -69,7 +69,7 @@ class Public::OrdersController < ApplicationController
 
       redirect_to complete_orders_path
     else
-    redirect_to request.referer, alert: "入力"
+    redirect_to request.referer
 
     end
 

@@ -30,7 +30,7 @@ class Public::CartItemsController < ApplicationController
   def update
     cart_item = CartItem.find(params[:id])
     if cart_item.update(cart_item_amount_params)
-      redirect_to cart_items_path
+      redirect_to cart_items_path, notice: "更新に成功しました"
     else
       redirect_to cart_items_path
     end
@@ -39,7 +39,7 @@ class Public::CartItemsController < ApplicationController
   def destroy
     cart_item = CartItem.find(params[:id])
     cart_item.destroy
-    redirect_to cart_items_path
+    redirect_to cart_items_path, notice: "カートから削除しました"
   end
 
   def destroy_all
