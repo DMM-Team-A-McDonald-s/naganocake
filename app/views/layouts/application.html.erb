@@ -13,7 +13,7 @@
 
   <body>
     <div class="wrapper">
-      <% if controller_path.start_with?("admin") %>
+      <% if admin_signed_in? %>
         <%= render "layouts/header_admin" %>
       <% else %>
         <%= render "layouts/header_public" %>
