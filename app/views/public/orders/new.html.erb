@@ -12,7 +12,7 @@
 
   <tr>
     <td>
-      &emsp;<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+      &emsp;<%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
       <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
     </td>
   </tr>
@@ -27,7 +27,7 @@
   </tr>
   <tr>
     <td>
-      &emsp;<%= f.radio_button :address_option, "1" %>
+      &emsp;<%= f.radio_button :address_option, "1", checked: true  %>
       <%= f.label :address, "ご自身の住所" %>
     </td>
   </tr>
