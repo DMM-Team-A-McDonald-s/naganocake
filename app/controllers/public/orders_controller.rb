@@ -19,24 +19,29 @@ class Public::OrdersController < ApplicationController
     @payment = params[:order][:payment_method]
     @main_total = 0
 
-    
-      if params[:order][:address_option] == "1"
-        @postal_code =@customer.postal_code
-        @address = @customer.address
-        @address_name = @customer.last_name + @customer.first_name
-      elsif params[:order][:address_option] == "2"
-        address_id = params[:order][:address_id]
-        customer_address = Address.find(address_id)
-        @postal_code = customer_address.postal_code
-        @address = customer_address.address
-        @address_name = customer_address.name
-      elsif params[:order][:address_option] == "3"
-        @postal_code = params[:order][:postal_code]
-        @address = params[:order][:address]
-        @address_name = params[:order][:name]
+    if params[:order][:address_option] == "1"
+      @postal_code =@customer.postal_code
+      @address = @customer.address
+      @address_name = @customer.last_name + @customer.first_name
+      if @postal_code.empty? or @address.empty? or @address_name.empty? or @payment.empty?
+        redirect_to request.referer
       end
-    if @postal_code.nil? && @address.nil? && @address_name.nil? && @payment.nil?
-      redirect_to request.referer
+    elsif params[:order][:address_option] == "2"
+      address_id = params[:order][:address_id]
+      customer_address = Address.find(address_id)
+      @postal_code = customer_address.postal_code
+      @address = customer_address.address
+      @address_name = customer_address.name
+      if @postal_code.empty? or @address.empty? or @address_name.empty? or @payment.empty?
+        redirect_to request.referer
+      end
+    elsif params[:order][:address_option] == "3"
+      @postal_code = params[:order][:postal_code]
+      @address = params[:order][:address]
+      @address_name = params[:order][:name]
+      if @postal_code.empty? or @address.empty? or @address_name.empty? or @payment.empty?
+        redirect_to request.referer
+      end
     end
     
   end
@@ -69,7 +74,7 @@ class Public::OrdersController < ApplicationController
 
       redirect_to complete_orders_path
     else
-    redirect_to request.referer
+    redirect_to new_order_path
 
     end
 
@@ -103,8 +108,5 @@ class Public::OrdersController < ApplicationController
     )
   end
 
-  # def order_detail_params
-  #    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount, :making_status)
-  # end
 
 end
