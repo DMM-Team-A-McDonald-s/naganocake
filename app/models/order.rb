@@ -20,6 +20,7 @@ class Order < ApplicationRecord
   validates :postal_code, format: { with: /\A\d{7}\z/, message: 'は7桁の半角数字のみで入力してください。' }
   validates :address, presence: true, length: { maximum: 255 }
 
+
   def subtotal
     item.with_tax_price * amount
   end
