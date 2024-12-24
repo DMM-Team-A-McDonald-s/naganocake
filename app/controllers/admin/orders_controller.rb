@@ -8,7 +8,7 @@ class Admin::OrdersController < ApplicationController
       if @order.status == "payment_confirmed"
         @order.order_details.update_all(making_status: :not_started)
       end
-      redirect_to admin_order_path(@order)
+      redirect_to admin_order_path(@order), notice: "変更が保存されました"
     else
       render :show
     end
