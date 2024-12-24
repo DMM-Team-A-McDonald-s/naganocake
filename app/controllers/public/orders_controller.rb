@@ -40,7 +40,7 @@ class Public::OrdersController < ApplicationController
       @address = params[:order][:address]
       @address_name = params[:order][:name]
       if @postal_code.empty? or @address.empty? or @address_name.empty? or @payment.empty?
-        redirect_to request.referer
+        redirect_to request.referer, alert: "お届け先を入力してください"
       end
     end
     

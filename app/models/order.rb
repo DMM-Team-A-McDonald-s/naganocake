@@ -21,6 +21,7 @@ class Order < ApplicationRecord
   validates :address, presence: true, length: { maximum: 255 }
   validates :payment_method, presence: true
 
+
   def subtotal
     item.with_tax_price * amount
   end
