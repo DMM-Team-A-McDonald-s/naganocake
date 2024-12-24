@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :name, length: { minimum: 1, maximum: 50, message: 'は必須項目です。' }
   validates :introduction, presence:true, length: {maximum: 200}
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
-  validates :is_active, presence: true
+  validates :is_active, inclusion: { in: [true, false] }
 
   def with_tax_price
     (price * 1.1).floor
